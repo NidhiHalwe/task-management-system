@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
+  // Require MONGO_URI explicitly from environment for connection
+  if (!process.env.MONGO_URI) {
+    console.error('MONGO_URI is not set in environment. Aborting MongoDB connection.');
+    process.exit(1);
+  }
+
   try {
-    const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/task_manager';
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB connected');
   } catch (err) {
-    console.error(err.message);
+    console.error('MongoDB connection error:', err.message || err);
     process.exit(1);
   }
 };

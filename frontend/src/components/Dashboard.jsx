@@ -48,6 +48,10 @@ export default function Dashboard() {
       setUser(me.data);
     } catch (err) {
       console.error(err);
+      if (err.response?.status === 401) {
+        removeToken();
+        nav('/login');
+      }
     }
   };
 

@@ -3,10 +3,10 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import TaskDetail from './components/TaskDetail';
-import { getToken } from './services/auth';
+import { isTokenValid } from './services/auth';
 
 function PrivateRoute({ children }) {
-  return getToken() ? children : <Navigate to="/login" replace />;
+  return isTokenValid() ? children : <Navigate to="/login" replace />;
 }
 
 export default function App() {

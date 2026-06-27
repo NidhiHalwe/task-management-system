@@ -14,7 +14,8 @@ export default function Register() {
     e.preventDefault();
     setErr(null);
     try {
-      const res = await auth.register({ name, email, password });
+      const payload = { name, email: email.trim().toLowerCase(), password };
+      const res = await auth.register(payload);
       saveToken(res.data.token);
       nav('/');
     } catch (error) {

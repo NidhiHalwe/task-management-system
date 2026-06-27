@@ -13,7 +13,8 @@ export default function Login() {
     e.preventDefault();
     setErr(null);
     try {
-      const res = await auth.login({ email, password });
+      const payload = { email: email.trim().toLowerCase(), password };
+      const res = await auth.login(payload);
       saveToken(res.data.token);
       nav('/');
     } catch (error) {

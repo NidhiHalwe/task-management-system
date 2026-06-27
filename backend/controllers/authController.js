@@ -9,10 +9,11 @@ exports.register = async (req, res) => {
 
   const { name, email, password } = req.body;
   try {
-    let user = await User.findOne({ email });
+    const normalizedEmail = email && typeof email === 'string' ? email.toLowerCase().trim() : email;
+    let user = await User.findOne({ email: normalizedEmail });
     if (user) return res.status(400).json({ msg: 'User already exists' });
 
-    user = new User({ name, email, password });
+    user = new User({ name, email: normalizedEmail, password });
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
@@ -35,7 +36,8 @@ exports.login = async (req, res) => {
 
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const normalizedEmail = email && typeof email === 'string' ? email.toLowerCase().trim() : email;
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, user.password);

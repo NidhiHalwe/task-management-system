@@ -1,10 +1,11 @@
 *{box-sizing:border-box;font-family: Arial, sans-serif}
-body{margin:0;background:#f4f6f8;color:#222}
+html{overflow-x:hidden}
+body{margin:0;background:#f4f6f8;color:#222;overflow-x:hidden}
 /* Dark dashboard base */
 body.dark{background:#07090b;color:#cbd6e6}
 /* Auth styles (dark theme) */
 .auth-outer{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0f1724 0%, #071020 100%)}
-.auth-box{width:520px;color:#dbeafe}
+.auth-box{width:100%;max-width:520px;color:#dbeafe;padding:0 12px}
 .auth-brand{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:12px}
 .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,#6b46c1,#4c1d95);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:white;box-shadow:0 8px 24px rgba(76,29,149,0.35)}
 .auth-card{background:rgba(10,14,20,0.6);padding:28px;border-radius:14px;backdrop-filter:blur(6px);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
@@ -163,12 +164,43 @@ button{padding:8px 12px;margin:4px}
 
 /* responsive */
 @media (max-width: 900px){
+	.app-header{height:auto;padding:16px 18px;flex-direction:column;align-items:flex-start;gap:12px}
+	.header-right{width:100%;justify-content:space-between;flex-wrap:wrap}
 	.stats-row{grid-template-columns:repeat(2,1fr)}
+	.columns{flex-direction:column}
 	.task-list{grid-template-columns:repeat(2,1fr)}
+	.controls{flex-direction:column;align-items:flex-start;gap:12px}
+	.filters{flex-wrap:wrap}
+	.row.two{flex-direction:column}
+	.modal .modal-content,.modal-form{width:95%;max-width:100%}
+	.auth-box{width:95%;max-width:100%}
+	.auth-card{padding:24px}
 }
 @media (max-width: 600px){
-	.stats-row{grid-template-columns:1fr}
-	.task-list{grid-template-columns:1fr}
+	html,body{overflow-x:hidden}
+	.container{padding:0 12px;margin:18px auto}
+	.app-header{padding:14px 12px;gap:10px}
 	.brand-title{display:none}
+	.stats-row,.task-list{grid-template-columns:1fr}
+	.column{min-height:auto}
+	.controls{flex-direction:column;align-items:stretch}
+	.filters{flex-direction:column;align-items:stretch;width:100%}
+	.filters select,.filters .filter-label,.priority-legend{width:100%}
+	.auth-outer{padding:16px}
+	.auth-box{width:95%;max-width:100%}
+	.auth-card{padding:20px}
+	.tab-row{flex-wrap:wrap}
+	.tab{flex:1;text-align:center}
+	.auth-form input,.auth-form textarea,.auth-form select,input,textarea,select,button,.primary,.muted,.logout,.actions button,.priority-selected,.assign-selected{width:100%;max-width:100%}
+	.actions{flex-direction:column}
+	.form-actions{flex-direction:column-reverse}
+	.form-actions button{width:100%}
+	.task-row{flex-direction:column;align-items:flex-start}
+	.task-right{width:100%;align-items:flex-start}
+	.task-meta{flex-wrap:wrap}
+	.modal{padding:12px}
+	.modal .modal-content,.modal-form{width:100%;max-width:100%;padding:16px}
+	.toast{left:12px;right:12px;bottom:12px}
+	.toast-inner{min-width:0;width:100%}
 }
 
